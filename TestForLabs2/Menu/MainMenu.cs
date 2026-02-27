@@ -8,7 +8,7 @@ namespace TestForLabs2.Menu
 {
     internal class MainMenu
     {
-        public static void ShowMenu()
+        public static void ShowMainMenu()
         {
             Console.Clear();
             Console.WriteLine("=======Меню=======");

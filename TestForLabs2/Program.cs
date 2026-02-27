@@ -22,7 +22,7 @@ namespace TestForLabs2
             bool running = true;
             while (running)
             {
-                Menu.MainMenu.ShowMenu();
+                Menu.MainMenu.ShowMainMenu();
 
 
                 int choice = ReadClass.ReadValue<int>(int.TryParse);
