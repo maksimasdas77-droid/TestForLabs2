@@ -11,6 +11,7 @@ namespace TestForLabs2.Classes
     {
         public string Name { get; set; }
         public string Number { get; set; }
+        public int Year { get; set; }
         public string Owner { get; set; }
 
         public DateTime CreatedAt { get; set; }

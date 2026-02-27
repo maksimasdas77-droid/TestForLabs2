@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestForLabs2.Input;
 using TestForLabs2.Menu;
+using TestForLabs2.Utills;
 
 namespace TestForLabs2
 {
@@ -13,10 +14,12 @@ namespace TestForLabs2
     {
         static void Main(string[] args)
         {
+
             Console.OutputEncoding = Encoding.UTF8;
             CultureInfo.CurrentCulture = new CultureInfo("ru-RU");
             CultureInfo.CurrentUICulture = new CultureInfo("ru-RU");
-
+            CarManager manager = new CarManager(); //создание объекта кар менеджер для выполнения его функций
+            Utills.Utill utils = new Utills.Utill(manager); //что бы работали методы из Utills (теперь все методы из Utills.Utill вызываются через utils.(название метода)
 
 
             bool running = true;
@@ -36,12 +39,12 @@ namespace TestForLabs2
 
                     case 1:
                         Console.Clear();
-
+                        manager.ShowCars();
                         break;
 
                     case 2:
                         Console.Clear();
-
+                        utils.AddCar();
                         break;
 
                     case 3:
