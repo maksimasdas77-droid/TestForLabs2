@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestForLabs2.Classes;
 using TestForLabs2;
+using TestForLabs2.Classes;
+using TestForLabs2.Input;
 
 
 namespace TestForLabs2.Utills
@@ -37,6 +38,19 @@ namespace TestForLabs2.Utills
 
             manager.AddCar(newCar);
 
+        }
+
+        public void RemoveCar()
+        {
+            if (manager.Cars.Any())
+            {
+                int index = ReadClass.ReadValue<int>("Введите номер автомобиля для удаления: ", int.TryParse);
+                manager.RemoveCar(index);
+                Console.ReadLine();
+            } else
+            {
+                Console.ReadLine();
+            }
         }
     }
 }

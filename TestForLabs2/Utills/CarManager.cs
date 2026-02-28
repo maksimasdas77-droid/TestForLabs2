@@ -19,7 +19,7 @@ namespace TestForLabs2.Utills
             if (Cars.Count == 0)
             {
                 Console.WriteLine("Список техники пуст.");
-                Console.ReadLine();
+
                 return;
             }
             for (int i = 0; i < Cars.Count; i++)
@@ -27,7 +27,7 @@ namespace TestForLabs2.Utills
                 Car car = Cars[i];
                 Console.WriteLine($"{i+1}. {car.Name}, {car.Number}, {car.Year} г.в., {car.Owner}");
             }
-            Console.ReadLine();
+
 
         }
 
@@ -40,11 +40,17 @@ namespace TestForLabs2.Utills
 
         public void RemoveCar(int index) //удаление машины по индексу
         {
-            if (index >= 0 && index <= Cars.Count) //необходимо еще дописать обложку метода в утиллс для записи в мейне
-            {
-                Cars.RemoveAt(index-1);
-            }
-
+            
+                if (index >= 0 && index <= Cars.Count) //необходимо еще дописать обложку метода в утиллс для записи в мейне
+                {
+                    Cars.RemoveAt(index - 1);
+                    Console.WriteLine("Автомобиль успешно удален");
+                }
+                else
+                {
+                Console.WriteLine("Такого автомобиля не существует");
+                }
+        
 
 
         }

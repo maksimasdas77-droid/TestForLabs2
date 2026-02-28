@@ -40,6 +40,7 @@ namespace TestForLabs2
                     case 1:
                         Console.Clear();
                         manager.ShowCars();
+                        Console.ReadLine();
                         break;
 
                     case 2:
@@ -49,7 +50,9 @@ namespace TestForLabs2
 
                     case 3:
                         Console.Clear();
-
+                        //Console.WriteLine("Введите номер автомобиля для удаления");
+                        manager.ShowCars();
+                        utils.RemoveCar();
                         break;
 
                     case 4:
