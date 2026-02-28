@@ -129,6 +129,24 @@ namespace TestForLabs2.Utills
             Console.WriteLine("Неисправность добавлена.");
             Console.ReadLine();
         }
+        public void RemoveFault(int carIndex)
+        {
+            var faults = manager.Cars[carIndex].Faults;
+            if (faults == null || faults.Count == 0)
+            {
+                Console.WriteLine("Неисправностей нет.");
+                Console.ReadLine();
+                return;
+            }
+            Console.WriteLine("Список неисправностей:");
+            for (int i = 0; i < faults.Count; i++)
+                Console.WriteLine($"{i + 1}. {faults[i].Description} (дата: {faults[i].Date:dd.MM.yyyy HH:mm})");
+            Console.Write("Введите номер неисправности для удаления: ");
+            int faultIndex = ReadClass.ReadValueWithCondition<int>(int.TryParse, x => x >= 1 && x <= faults.Count, $"Введите число от 1 до {faults.Count}: ");
+            faults.RemoveAt(faultIndex - 1);
+            Console.WriteLine("Неисправность удалена.");
+            Console.ReadLine();
+        }
 
         public void ShowFaults(int index)
         {
@@ -158,8 +176,9 @@ namespace TestForLabs2.Utills
                 Console.WriteLine(manager.Cars[index].ToPrettyString());
                 Console.WriteLine();
 
-                Console.WriteLine("1. Добавить неисправность");
-                Console.WriteLine("2. Показать неисправности");
+                Console.WriteLine("1. Показать неисправности");
+                Console.WriteLine("2. Добавить неисправности");
+                Console.WriteLine("3. Удалить неисправности");
                 Console.WriteLine("0. Назад");
 
                 int choice = ReadClass.ReadValue<int>("Выберите действие: ", int.TryParse);
@@ -171,13 +190,15 @@ namespace TestForLabs2.Utills
                         break;
 
                     case 1:
-                        AddFault(index);
-                        break;
-
-                    case 2:
                         ShowFaults(index);
                         break;
 
+                    case 2:
+                        AddFault(index);
+                        break;
+                    case 3:
+                        RemoveFault(index);
+                        break;
                     default:
                         Console.WriteLine("Неверный пункт меню.");
                         Console.ReadLine();
