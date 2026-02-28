@@ -7,6 +7,7 @@ using System.Web;
 
 namespace TestForLabs2.Classes
 {
+    [Serializable] //обозначение для сериализатора что можно данные записывать по байтам
     internal class Car
     {
         public string Name { get; set; }
@@ -18,5 +19,17 @@ namespace TestForLabs2.Classes
         public DateTime LastUpdatedAt { get; set; }
 
         public List<Fault> Faults { get; set; }
+
+        public string ToPrettyString() 
+        {
+            return 
+                $"Название: {Name}\n" + 
+                $"Гос. номер: {Number}\n" + 
+                $"Год выпуска: {Year}\n" + 
+                $"Владелец: {Owner}\n" + 
+                $"Создано: {CreatedAt:dd.MM.yyyy HH:mm}\n" + 
+                $"Обновлено: {LastUpdatedAt:dd.MM.yyyy HH:mm}"; 
+        }
     }
+
 }

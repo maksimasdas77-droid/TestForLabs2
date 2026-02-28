@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestForLabs2.Classes
 {
+    [Serializable]
     internal class Fault
     {
         public string Description { get; set; }

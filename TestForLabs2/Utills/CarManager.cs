@@ -3,25 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TestForLabs2.Classes;
+using Newtonsoft.Json;
+using System.IO;
 
 
 namespace TestForLabs2.Utills
 {
     internal class CarManager
     {
+
         public List<Car> Cars { get; private set; } = new List<Car>();
 
-        private const string FileName = @"D:\projekts\testforlabs\cars.bin"; //объявление абсолютного пути к файлу для будущих сохранений в файл и чтения из файла
+        private const string FileName = @"D:\projekts\testforlabs2\cars.bin"; //объявление абсолютного пути к файлу для будущих сохранений в файл и чтения из файла
 
         public void ShowCars()
         {
-            if (Cars.Count == 0)
-            {
-                Console.WriteLine("Список техники пуст.");
-
-                return;
-            }
+            Utill.CheckCars(Cars);
             for (int i = 0; i < Cars.Count; i++)
             {
                 Car car = Cars[i];
@@ -29,6 +28,17 @@ namespace TestForLabs2.Utills
             }
 
 
+        }
+        public void ShowAllCars()
+        {
+            Utill.CheckCars(Cars);
+            for (int i = 0; i < Cars.Count; i++)
+            {
+                //Car car = Cars[i];
+                Console.WriteLine($"[{i + 1}]");
+                Console.WriteLine(Cars[i].ToPrettyString());
+                Console.WriteLine();
+            }
         }
 
         public void AddCar(Car car) //добавление машины
@@ -50,9 +60,34 @@ namespace TestForLabs2.Utills
                 {
                 Console.WriteLine("Такого автомобиля не существует");
                 }
-        
+        }
 
+        public void UpdateCar(int index, Car newCar)
+        {
+            //Utill.CheckCars(Cars);
+            newCar.CreatedAt = Cars[index - 1].CreatedAt;
+            newCar.LastUpdatedAt = DateTime.Now;
+            Cars[index -1] = newCar;
+        }
 
+        public void SaveToFile()
+        {
+            string json = JsonConvert.SerializeObject(Cars, Formatting.Indented);
+            File.WriteAllText(FileName, json);
+            Console.WriteLine("Данные успешно сохранены.");
+        }
+
+        public void LoadFromFile()
+        {
+            if (!File.Exists(FileName))
+            {
+                Console.WriteLine("Файл не найден");
+                return;
+            }
+
+            string json = File.ReadAllText(FileName);
+            Cars = JsonConvert.DeserializeObject<List<Car>>(json);
+            Console.WriteLine("Данные успешно загружены.");
         }
     }
 }

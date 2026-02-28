@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -39,8 +40,25 @@ namespace TestForLabs2
 
                     case 1:
                         Console.Clear();
+                        if (!Utill.CheckCars(manager.Cars))
+                        {
+                            Console.ReadLine();
+                            break;
+                        }
                         manager.ShowCars();
-                        Console.ReadLine();
+                        Console.Write("Выберите автомобиль(0 - возврат в основное меню): ");
+                        //int carIndex = ReadClass.ReadValueWithCondition<int>(int.TryParse, x => x >= 1 && x <= manager.Cars.Count, $"Введите число от 1 до {manager.Cars.Count}: ");
+                        int carIndex = ReadClass.ReadValue<int>(int.TryParse);
+                        if(carIndex == 0)
+                        {
+                            break;
+                        } else if(carIndex < 0 || carIndex > manager.Cars.Count)
+                        {
+                            Console.WriteLine("Нет такого автомобиля");
+                            Console.ReadLine();
+                            break;
+                        }
+                            utils.ShowCarSubMenu(carIndex - 1);
                         break;
 
                     case 2:
@@ -57,17 +75,19 @@ namespace TestForLabs2
 
                     case 4:
                         Console.Clear();
-
+                        utils.UpdateCar();
                         break;
 
                     case 5:
                         Console.Clear();
-
+                        manager.SaveToFile();
+                        Console.ReadLine();
                         break;
 
                     case 6:
                         Console.Clear();
-
+                        manager.LoadFromFile();
+                        Console.ReadLine();
                         break;
 
                     default:
