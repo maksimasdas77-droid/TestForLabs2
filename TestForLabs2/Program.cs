@@ -21,7 +21,7 @@ namespace TestForLabs2
             CultureInfo.CurrentUICulture = new CultureInfo("ru-RU");
             CarManager manager = new CarManager(); //создание объекта кар менеджер для выполнения его функций
             Utills.Utill utils = new Utills.Utill(manager); //что бы работали методы из Utills (теперь все методы из Utills.Utill вызываются через utils.(название метода)
-
+            manager.LoadFromFile();
 
             bool running = true;
             while (running)
@@ -35,6 +35,7 @@ namespace TestForLabs2
                 {
                     case 0:
                         Console.WriteLine("завершение программы");
+                        utils.CloseMenu();
                         running = false;
                         break;
 

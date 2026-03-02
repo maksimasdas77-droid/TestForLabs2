@@ -14,7 +14,7 @@ namespace TestForLabs2.Utills
     {
         private CarManager manager; //для вызова методов из менеджера
 
-        public Utill(CarManager manager) 
+        public Utill(CarManager manager)
         {
             this.manager = manager;
         }
@@ -147,6 +147,13 @@ namespace TestForLabs2.Utills
             Console.WriteLine("Неисправность удалена.");
             Console.ReadLine();
         }
+        public void UpdateFault(int Index, Fault newfault) //доделать, потому что уже запутался
+        {
+            var faults = manager.Cars[Index].Faults;
+            newfault.Date = faults[Index - 1].Date;
+            newfault.UpdateAt = DateTime.Now;
+            Fault fault = newfault;
+        }
 
         public void ShowFaults(int index)
         {
@@ -165,6 +172,13 @@ namespace TestForLabs2.Utills
             }
             Console.ReadLine();
         }
+        public void UpdateFault(int index)
+        {
+            ShowFaults(index);
+            var faults = manager.Cars[index].Faults;
+            int choice = ReadClass.ReadValueWithCondition<int>("Введите номер неисправности для изменения: ", int.TryParse, x => x >= 1 && x <= faults.Count, "Нет такой неисправности, попробуй еще раз: ");
+
+        }
         public void ShowCarSubMenu(int index)
         {
             bool running = true;
@@ -179,6 +193,7 @@ namespace TestForLabs2.Utills
                 Console.WriteLine("1. Показать неисправности");
                 Console.WriteLine("2. Добавить неисправности");
                 Console.WriteLine("3. Удалить неисправности");
+                Console.WriteLine("4. Изменить неисправность");
                 Console.WriteLine("0. Назад");
 
                 int choice = ReadClass.ReadValue<int>("Выберите действие: ", int.TryParse);
@@ -199,6 +214,9 @@ namespace TestForLabs2.Utills
                     case 3:
                         RemoveFault(index);
                         break;
+                    case 4:
+                        //UpdateFault(index);
+                        break;
                     default:
                         Console.WriteLine("Неверный пункт меню.");
                         Console.ReadLine();
@@ -206,7 +224,20 @@ namespace TestForLabs2.Utills
                 }
             }
         }
+        public void CloseMenu()
+        {
+            Console.WriteLine("Сохранить перед выходом?");
+            int choice = ReadClass.ReadValueWithCondition<int>("1 - да | 2 - нет: ", int.TryParse, x => x >= 1 && x <= 2, "Не правильный вариант меню, попробуйте снова: ");
+            switch (choice)
+            {
+                case 1:
+                    manager.SaveToFile();
+                    break;
+                    case 2:
+                    break;
+            }
 
+        }
 
 
 
