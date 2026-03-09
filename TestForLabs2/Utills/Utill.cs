@@ -22,7 +22,7 @@ namespace TestForLabs2.Utills
         public static bool CheckCars(List<Car> Cars) //вызывать потом Utill.CheckCars(Cars);
         {
             if (!Cars.Any())
-            {
+            {   
                 Console.WriteLine("Список техники пуст.");
                 return false;
             }

@@ -64,7 +64,7 @@ namespace TestForLabs2.Utills
 
         public void UpdateCar(int index, Car newCar)
         {
-            //Utill.CheckCars(Cars);
+            Utill.CheckCars(Cars);
             newCar.CreatedAt = Cars[index - 1].CreatedAt;
             newCar.LastUpdatedAt = DateTime.Now;
             Cars[index -1] = newCar;
